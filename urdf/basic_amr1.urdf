@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<robot name="basic_amr">
+  
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <material name="green">
+    <color rgba="0.1 0.8 0.1 1"/>
+  </material>
+
+  <!-- Begin - Robot description -->
+
+  <link name="base_footprint" />
+
+  <joint name="base_link__base_footprint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint>
+
+  <link name="base_link">
+    <origin rpy="0 0 0" xyz="0.00 0 0.00"/>
+    <visual>
+      <geometry>
+        <box size="0.08 0.05 0.002"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+
+  <!-- End - Robot description -->
+
+</robot>
