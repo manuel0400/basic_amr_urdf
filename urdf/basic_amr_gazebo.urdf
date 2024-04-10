@@ -1,0 +1,203 @@
+<?xml version="1.0" ?>
+
+<robot name="basic_amr">
+
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <material name="green">
+    <color rgba="0.1 0.8 0.1 1"/>
+  </material>
+
+  <!-- Begin - Robot description -->
+
+  <link name="base_footprint" />
+
+  <joint name="base_footprint__base_link" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint>
+
+  <link name="base_link">
+    <origin rpy="0 0 0" xyz="0.00 0 0.00"/>
+    <visual>
+      <geometry>
+        <box size="0.08 0.05 0.002"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.08 0.05 0.002"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.5" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+  <link name="fcastor_wheel">
+    <origin rpy="0 0 0" xyz="0.00 0 0.00"/>
+    <visual>
+      <geometry>
+        <cylinder length="0.006" radius="0.0035"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.006" radius="0.0035"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+  </link>
+  
+  <joint name="base_link__fcastor_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="fcastor_wheel"/>
+    <origin xyz="0.028 0 -0.005" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="bcastor_wheel">
+    <origin rpy="0 0 0" xyz="0.00 0 0.00"/>
+    <visual>
+      <geometry>
+        <cylinder length="0.006" radius="0.0035"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.006" radius="0.0035"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+  </link>
+  
+  <joint name="base_link__bcastor_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="bcastor_wheel"/>
+    <origin xyz="-0.028 0 -0.005" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="left_wheel">
+    <origin rpy="0 0 0" xyz="0.00 0 0.00"/>
+    <visual>
+      <geometry>
+        <cylinder length="0.006" radius="0.016"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.006" radius="0.016"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+  </link>
+  
+  <joint name="wheel_left_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0 0.032 0.007" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <link name="right_wheel">
+    <origin rpy="0 0 0" xyz="0.00 0 0.00"/>
+    <visual>
+      <geometry>
+        <cylinder length="0.006" radius="0.016"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.006" radius="0.016"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+  </link>
+  
+  <joint name="wheel_right_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0 -0.032 0.007" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <!-- End - Robot description -->
+
+  <!-- Begin - Gazebo definition -->
+
+  <gazebo reference="base_link">
+    <material>Gazebo/White</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="left_wheel">
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="fcastor_wheel">
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="bcastor_wheel">
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <!-- End - Gazebo plugins -->
+
+</robot>
