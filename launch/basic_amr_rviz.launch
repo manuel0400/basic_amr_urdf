@@ -2,7 +2,7 @@
 <launch>
 
   <!-- Description of the robot -->
-  <param name="robot_description" textfile="$(find basic_amr_urdf)/urdf/basic_amr1.urdf" />
+  <param name="robot_description" textfile="$(find basic_amr_urdf)/urdf/basic_amr.urdf" />
 
   <!-- Publish the states of the robot's joints -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
